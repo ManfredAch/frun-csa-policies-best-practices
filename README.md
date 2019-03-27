@@ -10,12 +10,34 @@ Installation steps will be found at the [Focused Run for SAP Solution Manager](h
 Review the information in the tabs on that page titled, "Get Focused Run" and "Implement Focused Run". 
 
 Usually a Focused Run Architecture and Project Setup Workshop is performed to install and configure the Focused Run infrastructure in close cooperation with the customer team: technical deployment, landscape discovery, as well as network settings will need to be covered in such meetings. Some managed systems will be connected to Focused Run, including activation of some use cases.
+
+After connecting the managed systems to Focused Run, you can start to configure FRUN CSA Validation using policies provided in this repository. Those policies could be uploaded in FRUN CSA Policy Management (start FRUN Launchpad / Advanced Configuration Management / tile Configuration and Security Analytics then Links / Policy Management / New) and generated. When creating a new policy, you many use the Policy Id and Policy Descr of the XML policy as input (<targetsystem desc="Policy Descr" id="Policy Id">) to have consistency between what is stored in FRUN CSA and the XML policy. 
+
+If you are using an editor of your choice you may use the XSF file in Schema to support you with further XML syntax checks and input help.
+  
+All provided powershell scripts have been implemented and tested using PSVersion 5.1 / PSEdition Desktop. All scripts provide further help using the powershell cmd-let get-help.
+
 # Configuration
-After connecting the managed systems to Focused Run, you can start to configure FRUN CSA Validation using policies provided in this repository. Those policies could be uploaded in FRUN CSA Policy Management (FRUN Launchpad / Advanced Configuration Management / tile Configuration and Security Analytics then Links / Policy Management). When creating a new policy, you many use the Policy Id and Policy Descr of the XML policy as input. Use those policies as a template for your own policies reflecting the requirements of your corporate hardening guides and security policies. Demo: [Configuration and Security Analytics ](https://sapvideoa35699dc5.hana.ondemand.com/?entry_id=1_ce0ht4id)
+Use the baseline policies as a template for your own policies reflecting the requirements of your corporate hardening guides and security policies. Demo: [Configuration and Security Analytics ](https://sapvideoa35699dc5.hana.ondemand.com/?entry_id=1_ce0ht4id)
+In many cases the check ids of the provided SAP Baseline Policies have to be adapted to match requirement ids of customer corporate hardening guide. Re-Use or adapt the check rules when matching the corporate guide.
+
+To get transparency about the implementation status of security notes (currently for systems of type ABAP and for SAP HANA database) use the notes policies in NotesPolicies. Those are defined per SAP patchday and contain rules for all notes which are measurable using FRUN CSA. It would be possible to upload each single patchday individually as FRUN CSA policy. It would be also possible to merge single patch days into new a policy. To support this kind of tasks you may use the following scripts.
+```
+MergePolicy: merges several FRUN CSA policies into a new policy
+getNotes: reads node definitions from several policies and stores all of them into a new policy
+countNotes: counts the number of note defintions within a policy (lists all notes)
+deletNotes: deletes duplicate note defintions in a policy
+```
+In MiscPolicies/ABAPSPStackAge a policy is provided which is able to measure if a SAP Basis component of an ABAP system is older than 18 month to understand if the support with SAP security notes is still guaranteed.
+
 # Limitations
 The number of check items is not limited per policy, however, as a rule of thumb you should not add more than approximately 100 check items to a single policy.
 # Known Issues
-None
+Within the complianct and non-compliant element text you need to escape the operators
+```
+> &gt;
+< &lt;
+```
 # How to obtain support
 Please report issues in Focused Run Advanced Configuration Monitoring using SAP's product support channels.
 For questions regarding the provided policies or scripts please use this [issue template](https://github.com/SAP/frun-csa-policies-best-practices/issues).
