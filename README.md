@@ -22,12 +22,11 @@ Use the baseline policies as a template for your own policies reflecting the req
 In many cases the check ids of the provided SAP Baseline Policies must adapted to match requirement ids of customer corporate hardening guide. Re-Use or adapt the check rules when matching the corporate guide.
 
 To get transparency about the implementation status of security notes (currently for systems of type ABAP and for SAP HANA database) use the notes policies in NotesPolicies. Those are defined per SAP patchday and contain rules for all notes which are measurable using FRUN CSA. It would be possible to upload each single patchday individually as FRUN CSA policy. It would be also possible to merge single patch days into new a policy. To support this kind of tasks you may use the following scripts.
-```
-MergePolicy: merges several FRUN CSA policies into a new policy
-getNotes: reads node definitions from several policies and stores all of them into a new policy
-countNotes: counts the number of note definitions within a policy (lists all notes)
-deletNotes: deletes duplicate note definitions in a policy
-```
+* MergePolicy: merges several FRUN CSA policies into a new policy
+* getNotes: reads node definitions from several policies and stores all of them into a new policy
+* countNotes: counts the number of note definitions within a policy (lists all notes)
+* deletNotes: deletes duplicate note definitions in a policy
+
 In MiscPolicies/ABAPSPStackAge a policy is provided which is able to measure if a SAP Basis component of an ABAP system is older than 18 month to understand if the support with SAP security notes is still guaranteed.
 
 # Limitations
