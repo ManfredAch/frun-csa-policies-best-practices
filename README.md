@@ -21,12 +21,13 @@ All provided powershell scripts have been implemented and tested using PSVersion
 Use the baseline policies as a template for your own policies reflecting the requirements of your corporate hardening guides and security policies. Demo: [Configuration and Security Analytics ](https://sapvideoa35699dc5.hana.ondemand.com/?entry_id=1_ce0ht4id)
 In many cases the check ids of the provided SAP Baseline Policies must adapted to match requirement ids of customer corporate hardening guide. Re-Use or adapt the check rules when matching the corporate guide.
 
-To get transparency about the implementation status of security notes (currently for systems of type ABAP and for SAP HANA database) use the notes policies in NotesPolicies. Those are defined per SAP patchday and contain rules for all notes which are measurable using FRUN CSA. It's possible to upload each single patchday individually as FRUN CSA policy. It would be also possible to merge single patch days into new a policy. To support this kind of tasks you may use the following scripts.
+To get transparency about the implementation status of security notes (currently for systems of type ABAP and for SAP HANA database) use the notes policies in NotesPolicies. Those are defined per SAP patchday and contain rules for all notes which are measurable using FRUN CSA. It's possible to upload each single patchday individually as FRUN CSA policy. It would be also possible to merge single patch days into new a policy. To support this kind of tasks you may use the following scripts or perform it using an editor via copy and paste functions.
 * MergePolicy: merges several FRUN CSA policies into a new policy
 * getNotes: reads node definitions from several policies and stores all of them into a new policy
 * countNotes: counts the number of note definitions within a policy (lists all notes)
 * deleteNotes: deletes duplicate note definitions in a policy
-For the ABAP patchdays in 2018 you find policy ABAP_snotes_patchday_2018-0**1_12**.xml which contains all notes of 2018 in one policy next to policies organized by patch day date (like ABAP_snotes_patchday_2018-**01**.xml for patch day in Jan 2018).
+
+For the ABAP patchdays in 2018 you find policy ABAP_snotes_patchday_2018-0**1_12**.xml which contains all notes of 2018 in one policy next to policies organized by patch day date (like ABAP_snotes_patchday_2018-**01**.xml for patch day in Jan 2018). You are going to choose the policy id in FRUN CSA validation to start the compliance checks, so the policy content defines the number of checks you see in one run.  
 
 In MiscPolicies/ABAPSPStackAge a policy is provided which is able to measure if a SAP Basis component of an ABAP system is older than 18 month to understand if the support with SAP security notes is still guaranteed. The policy is created based on the excel and script you find in that folder too. The excel contains in sheet NW_ALL for SAP Basis Support Package the **released on date** from SAP's Product Availability Matrix and is used as source to set the rule using script createAgeOfBasisPolicy.ps1-
 
